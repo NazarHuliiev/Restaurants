@@ -29,18 +29,18 @@ Accept: application/json
 
 ###
 
-PUT {{Restaurants.API_HostAddress}}/api/restaurants/2
+POST {{Restaurants.API_HostAddress}}/api/restaurants/
 Content-Type: application/json
 
 {
-  "name": "McDonald NEW",
-  "description": "McDonald's Corporation (McDonald's), incorporated on December 21, 1964, operates and franchises McDonald's restaurants. 1",
-  "category": "Fast Food 1",
+  "name": "New rest 3",
+  "description": "new rest description 3",
+  "category": "Fast Food",
   "hasDelivery": true,
-  "city": "London 1",
-  "street": "Boots",
-  "building": "1931",
-  "apartment": null,
+  "city": "Ternopil",
+  "street": "Yaremy",
+  "building": "9",
+  "apartment": "107",
   "mainPhoneNumber": "0991270911",
   "mainEmail": "sdfasf@gmail.com1"
 }
