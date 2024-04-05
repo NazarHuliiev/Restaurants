@@ -6,7 +6,10 @@ public interface IRestaurantsRepository
 {
     Task<IEnumerable<Restaurant>> GetAllAsync();
 
-    Task<Restaurant?> GetById(int id);
+    Task<Restaurant?> GetByIdAsync(int id);
     
-    Task<int> Create(Restaurant restaurant);
+    Task<int> CreateAsync(Restaurant restaurant);
+    
+    Task<bool> DeleteAsync(int id);
+    Task SaveChangesAsync();
 }

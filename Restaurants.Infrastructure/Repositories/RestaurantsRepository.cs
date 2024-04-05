@@ -17,7 +17,7 @@ public class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurant
         return restaurants;
     }
 
-    public async Task<Restaurant?> GetById(int id)
+    public async Task<Restaurant?> GetByIdAsync(int id)
     {
         var restaurant = await dbContext
             .Restaurants
@@ -27,7 +27,7 @@ public class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurant
         return restaurant;
     }
 
-    public async Task<int> Create(Restaurant restaurant)
+    public async Task<int> CreateAsync(Restaurant restaurant)
     {
          await dbContext.Restaurants.AddAsync(restaurant);
 
@@ -35,4 +35,13 @@ public class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurant
 
          return restaurant.Id;
     }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var deletedRows = await dbContext.Restaurants.Where(r => r.Id == id).ExecuteDeleteAsync();
+
+        return deletedRows > 0;
+    }
+
+    public Task SaveChangesAsync() => dbContext.SaveChangesAsync();
 }

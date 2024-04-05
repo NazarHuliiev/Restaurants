@@ -15,7 +15,7 @@ public class GetRestaurantByIdQueryHandler(
     {
         logger.LogInformation($"Getting restaurant id {request.Id}");
 
-        var restaurant = await repository.GetById(request.Id);
+        var restaurant = await repository.GetByIdAsync(request.Id);
         var restaurantDto = mapper.Map<RestaurantDto?>(restaurant);
 
         return restaurantDto;

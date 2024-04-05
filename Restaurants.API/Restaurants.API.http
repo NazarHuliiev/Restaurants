@@ -7,7 +7,7 @@ Accept: application/json
 
 ###
 
-GET {{Restaurants.API_HostAddress}}/api/restaurants/3
+GET {{Restaurants.API_HostAddress}}/api/restaurants/2
 Accept: application/json
 
 ###
@@ -20,6 +20,29 @@ Content-Type: application/json
   "city": "ternopil",
   "name": "Faine",
   "category": "Fast Food"
+}
+
+###
+
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/3
+Accept: application/json
+
+###
+
+PUT {{Restaurants.API_HostAddress}}/api/restaurants/2
+Content-Type: application/json
+
+{
+  "name": "McDonald NEW",
+  "description": "McDonald's Corporation (McDonald's), incorporated on December 21, 1964, operates and franchises McDonald's restaurants. 1",
+  "category": "Fast Food 1",
+  "hasDelivery": true,
+  "city": "London 1",
+  "street": "Boots",
+  "building": "1931",
+  "apartment": null,
+  "mainPhoneNumber": "0991270911",
+  "mainEmail": "sdfasf@gmail.com1"
 }
 
 ###

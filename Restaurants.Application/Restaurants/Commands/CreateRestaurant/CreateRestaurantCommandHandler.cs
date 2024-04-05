@@ -17,7 +17,7 @@ public class CreateRestaurantCommandHandler(
         logger.LogInformation("Creating a new restaurant");
         
         var newRestaurant = mapper.Map<Restaurant>(request);
-        var newRestaurantId = await restaurantsRepository.Create(newRestaurant);
+        var newRestaurantId = await restaurantsRepository.CreateAsync(newRestaurant);
 
         return newRestaurantId;
     }
