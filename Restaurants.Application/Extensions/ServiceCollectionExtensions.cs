@@ -13,8 +13,8 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration)
     {
         var applicationAssembly = typeof(ServiceCollectionExtensions).Assembly;
-        
-        services.AddTransient<IRestaurantsService, RestaurantsService>();
+
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
         services.AddAutoMapper(applicationAssembly);
         services.AddValidatorsFromAssembly(applicationAssembly)
             .AddFluentValidationAutoValidation();
