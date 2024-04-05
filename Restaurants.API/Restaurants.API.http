@@ -1,0 +1,36 @@
+@host = https://localhost
+@port = 7200
+@Restaurants.API_HostAddress = {{host}}:{{port}}
+
+GET {{Restaurants.API_HostAddress}}/api/restaurants/
+Accept: application/json
+
+###
+
+GET {{Restaurants.API_HostAddress}}/api/restaurants/3
+Accept: application/json
+
+###
+
+POST {{Restaurants.API_HostAddress}}/api/restaurants/
+Content-Type: application/json
+
+{
+  "mainEmail": "testmail@",
+  "city": "ternopil",
+  "name": "Faine",
+  "category": "Fast Food"
+}
+
+###
+
+#"name": "New rest 1",
+#"description": "New rest description",
+#"category": "Fast Food",
+#"hasDelivery": true,
+#"city": "Ternopil",
+#"street": "Yaremy",
+#"building": "9",
+#"apartment": "107",
+#"mainPhoneNumber": "0731270966",
+#"mainEmail": "sdfasf@gmail.com"
