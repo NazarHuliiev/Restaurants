@@ -31,4 +31,11 @@ public class DishesRepository(RestaurantsDbContext dbContext) : IDishesRepositor
         dbContext
             .Dishes
             .FirstOrDefaultAsync(d => d.Id == id);
+
+    public async Task<bool> DeleteDishAsync(int id)
+    {
+        var deletedRowsNumber = await dbContext.Dishes.Where(d => d.Id == id).ExecuteDeleteAsync();
+
+        return deletedRowsNumber > 0;
+    }
 }

@@ -9,4 +9,6 @@ public interface IDishesRepository
     Task<Dish?> GetByIdAsync(int id);
     
     Task<int> CreateAsync(Dish dish);
+
+    Task<bool> DeleteDishAsync(int id);
 }
