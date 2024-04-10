@@ -1,22 +1,40 @@
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Restaurants.Domain.Constants;
 using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Persistence;
 
 namespace Restaurants.Infrastructure.Seeders;
 
-public class RestaurantsSeeder(RestaurantsDbContext _dbContext) : IRestaurantsSeeder
+public class RestaurantsSeeder(RestaurantsDbContext dbContext) : IRestaurantsSeeder
 {
     public async Task Seed()
     {
-        if (await _dbContext.Database.CanConnectAsync())
+        if (await dbContext.Database.CanConnectAsync())
         {
-            if (!_dbContext.Restaurants.Any())
+            if (!dbContext.Restaurants.Any())
             {
                 var restaurants = GetRestaurants();
-                await _dbContext.Restaurants.AddRangeAsync(restaurants);
-                await _dbContext.SaveChangesAsync();
+                await dbContext.Restaurants.AddRangeAsync(restaurants);
+                await dbContext.SaveChangesAsync();
+            }
+
+            if (!dbContext.Roles.Any())
+            {
+                var roles = GetRoles();
+                await dbContext.Roles.AddRangeAsync(roles);
+                await dbContext.SaveChangesAsync();
             }
         }
+    }
+
+    private IEnumerable<IdentityRole> GetRoles()
+    {
+        return 
+        [
+            new IdentityRole(UserRoles.Owner),
+            new IdentityRole(UserRoles.Admin),
+            new IdentityRole(UserRoles.User)
+        ];
     }
     
     private IEnumerable<Restaurant> GetRestaurants()

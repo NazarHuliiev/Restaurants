@@ -1,6 +1,17 @@
 @host = https://localhost
 @port = 7200
 @Restaurants.API_HostAddress = {{host}}:{{port}}
+@token = CfDJ8GanK--2dhJNkIcpNHWVRj759yyKuzYbQ5xORdmul633NH-tBxs0bfqSMarzDpzMgjZt4jFZawiHmlbWy-nNx-Ut9YcB6En-kjp4DV9qjVxuqb8sANdwRoX5EDYBwsVTzF4IfgbWNENQybxJH2SkqA7nHMCvLI-r-s5C2zLDbQ8P0-YbPSIs2bqTdjvFTKPm4JZEYXKKoDwpioYnPnkamxenR-ddAQWU-aRnmXTSwM2vIo_5IB60nrVzTPrRXoCMiND9lyOOzJjQ-hRoJnWTUN1n0UU4Zv0SMAlRm3-aU7S5l8mA7LQO5xMt7cfTu2J4z-P-WtXK-Zo18YrM2MGlq2ieQiDukZ3OqkPagZUvgq_wBhBVhuPQmWbsgiSpCnp_sfKVWSO-VRak_FWCevqmXsx-RBDToRPVQQ3kxPleEeONh24QMmcMvCSTOClMKg8JEEMelw097jbHF4TXzoGjafRfX9LpOjBizluKUU5YMim0QZTCcqeu1DVrHUhmHJpwcIOMTCwcqKLCKojn_r18S3wed7OWQJt4WlbaZbnA5Jg4J8nyCHzphsoeWTQ7wKfTOtqfy1cPuu8efw5p7F-kZO4ke3e7GjYYapBR3mMqYmUWZoNqpqh1DiB9E-69dHD9YaYH1JSG3d7uE7l_c4RZeduzYwCDX7hvZPakdX_1lTxmIylxkxsGuACnOlv00nKUdAC8a5jMTrcwc-fjxzSeakwuhuLSOhS2_epayhUYDx0VSrMn_7diaXh7pGThMjZ7rY1GbQOod1dl86Dx1ehA9VJO0QX71oQ2cDhHNF_XRBki
+
+POST {{Restaurants.API_HostAddress}}/api/identity/login/
+Content-Type: application/json
+
+{
+  "email": "owner@gmail.com",
+  "password": "Qwerty1!"
+}
+
+###
 
 GET {{Restaurants.API_HostAddress}}/api/restaurants/
 Accept: application/json
@@ -8,19 +19,8 @@ Accept: application/json
 ###
 
 GET {{Restaurants.API_HostAddress}}/api/restaurants/6567
+Authorization: Bearer {{token}}
 Accept: application/json
-
-###
-
-POST {{Restaurants.API_HostAddress}}/api/restaurants/
-Content-Type: application/json
-
-{
-  "mainEmail": "testmail@",
-  "city": "ternopil",
-  "name": "Faine",
-  "category": "Fast Food"
-}
 
 ###
 
@@ -30,11 +30,12 @@ Accept: application/json
 ###
 
 POST {{Restaurants.API_HostAddress}}/api/restaurants/
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "name": "New rest 3",
-  "description": "new rest description 3",
+  "name": "New rest 9",
+  "description": "new rest description 9",
   "category": "Fast Food",
   "hasDelivery": true,
   "city": "Ternopil",
@@ -48,16 +49,6 @@ Content-Type: application/json
 ###
 
 POST {{Restaurants.API_HostAddress}}/register/
-Content-Type: application/json
-
-{
-  "email": "nazar.huliev@gmail.com",
-  "password": "Qwerty1!"
-}
-
-###
-
-POST {{Restaurants.API_HostAddress}}/login/
 Content-Type: application/json
 
 {
