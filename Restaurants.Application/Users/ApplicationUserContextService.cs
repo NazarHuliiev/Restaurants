@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace Restaurants.Application.User;
+namespace Restaurants.Application.Users;
 
 public class ApplicationUserContextService(
     IHttpContextAccessor httpContextAccessor)
