@@ -47,6 +47,26 @@ Content-Type: application/json
 
 ###
 
+POST {{Restaurants.API_HostAddress}}/register/
+Content-Type: application/json
+
+{
+  "email": "nazar.huliev@gmail.com",
+  "password": "Qwerty1!"
+}
+
+###
+
+POST {{Restaurants.API_HostAddress}}/login/
+Content-Type: application/json
+
+{
+  "email": "nazar.huliev@gmail.com",
+  "password": "Qwerty1!"
+}
+
+###
+
 #"name": "New rest 1",
 #"description": "New rest description",
 #"category": "Fast Food",
