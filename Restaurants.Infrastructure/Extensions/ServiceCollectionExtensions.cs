@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurants.Domain.Entities.Identity;
 using Restaurants.Domain.Repositories;
+using Restaurants.Infrastructure.Authorization;
 using Restaurants.Infrastructure.Persistence;
 using Restaurants.Infrastructure.Repositories;
 using Restaurants.Infrastructure.Seeders;
@@ -21,10 +22,14 @@ public static class ServiceCollectionExtensions
         services
             .AddIdentityApiEndpoints<User>()
             .AddRoles<IdentityRole>()
+            .AddClaimsPrincipalFactory<RestaurantUserClaimsPrincipalFactory>()
             .AddEntityFrameworkStores<RestaurantsDbContext>();
 
         services.AddScoped<IRestaurantsSeeder, RestaurantsSeeder>();
         services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
         services.AddScoped<IDishesRepository, DishesRepository>();
+        services.AddAuthorizationBuilder()
+            .AddPolicy(PolicyNames.HasCurrentCountry, builder => builder.RequireClaim(AppClaimTypes.CurrentCountry));
+            //.AddPolicy(PolicyNames.HasCurrentCountry, builder => builder.RequireClaim(AppClaimTypes.CurrentCountry, "Ukraine"));
     }
 }
