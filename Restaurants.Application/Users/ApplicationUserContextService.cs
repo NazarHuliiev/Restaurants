@@ -24,7 +24,10 @@ public class ApplicationUserContextService(
         var userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
         var email = user.FindFirst(c => c.Type == ClaimTypes.Email)!.Value;
         var roles = user.Claims.Where(c => c.Type == ClaimTypes.Role)!.Select(r => r.Value);
-
-        return new ApplicationUser(userId, email, roles);
+        var currentCountry = user.FindFirst(c => c.Type == "CurrentCountry")?.Value;
+        var dateOfBirthClaimValue = user.FindFirst(c => c.Type == "DateOfBirth")?.Value;
+        var dateOfBirth = string.IsNullOrEmpty(dateOfBirthClaimValue) ? (DateOnly?)null : DateOnly.ParseExact(dateOfBirthClaimValue, "yyyy-MM-dd");
+        
+        return new ApplicationUser(userId, email, roles, CurrentCountry: currentCountry, DateOfBirth: dateOfBirth);
     }
 }

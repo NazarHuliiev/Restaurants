@@ -27,7 +27,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RestaurantDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [HttpGet("{id}")]
-    [Authorize(Policy = PolicyNames.HasCurrentCountry)]
+    //[Authorize(Policy = PolicyNames.HasCurrentCountry)]
+    [Authorize(Policy = PolicyNames.AlLeast20)]
     public async Task<ActionResult<RestaurantDto>> Get(int id)
     {
         var result = await mediator.Send(new GetRestaurantByIdQuery(id));
