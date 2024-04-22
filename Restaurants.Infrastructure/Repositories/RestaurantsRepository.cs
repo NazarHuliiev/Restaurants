@@ -27,6 +27,17 @@ public class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurant
         return restaurant;
     }
 
+    public async Task<IEnumerable<Restaurant>> GetRestaurantsForOwner(string ownerId)
+    {
+        var restaurants = await dbContext
+            .Restaurants
+            .Where(r => r.OwnerId == ownerId)
+            .AsNoTracking()
+            .ToListAsync();
+
+        return restaurants;
+    }
+
     public async Task<int> CreateAsync(Restaurant restaurant)
     {
          await dbContext.Restaurants.AddAsync(restaurant);
