@@ -6,6 +6,7 @@ using Restaurants.Domain.Entities.Identity;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
 using Serilog;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +30,10 @@ app.UseSerilogRequestLogging();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();   
+    app.UseSwaggerUI(o =>
+    {
+        o.DocExpansion(DocExpansion.None);
+    });   
 }
 
 app.UseHttpsRedirection();

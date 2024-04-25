@@ -9,15 +9,15 @@ public static class WebApplicationBuilderExtensions
     public static void AddPresentation(this WebApplicationBuilder builder)
     {
         builder.Services.AddControllers();
-        builder.Services.AddSwaggerGen(c =>
+        builder.Services.AddSwaggerGen(opt =>
         {
-            c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+            opt.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
             {
                 Type = SecuritySchemeType.Http,
                 Scheme = "Bearer"
             });
     
-            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            opt.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
                 {
                     new OpenApiSecurityScheme
