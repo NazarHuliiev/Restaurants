@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Infrastructure", "Restaurants.Infrastructure\Restaurants.Infrastructure.csproj", "{6AEEE1D0-D175-4F86-9720-14BE24CE4B4B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0D68D0A1-BA90-45C7-9109-9C8C8A9345ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Application.Tests", "Restaurants.Application.Tests\Restaurants.Application.Tests.csproj", "{C35B0444-B2F4-4584-A4BB-A0A5A9A70232}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,12 @@ Global
 		{6AEEE1D0-D175-4F86-9720-14BE24CE4B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AEEE1D0-D175-4F86-9720-14BE24CE4B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AEEE1D0-D175-4F86-9720-14BE24CE4B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C35B0444-B2F4-4584-A4BB-A0A5A9A70232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C35B0444-B2F4-4584-A4BB-A0A5A9A70232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C35B0444-B2F4-4584-A4BB-A0A5A9A70232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C35B0444-B2F4-4584-A4BB-A0A5A9A70232}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C35B0444-B2F4-4584-A4BB-A0A5A9A70232} = {0D68D0A1-BA90-45C7-9109-9C8C8A9345ED}
 	EndGlobalSection
 EndGlobal
