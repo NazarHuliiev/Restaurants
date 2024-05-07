@@ -1,4 +1,7 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Restaurants.Application.Restaurants.Dtos;
+using Restaurants.Domain.Constants;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Repositories;
 using Restaurants.Infrastructure.Persistence;
@@ -17,14 +20,33 @@ public class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurant
         return restaurants;
     }
 
-    public async Task<(IEnumerable<Restaurant> restaurants, int totalCount)> GetAllMatchingAsync(string? searchPhrase, int pageSize, int pageNumber)
+    public async Task<(IEnumerable<Restaurant> restaurants, int totalCount)> GetAllMatchingAsync(
+        string? searchPhrase,
+        int pageSize,
+        int pageNumber,
+        string? sortBy,
+        SortingDirection sortingDirection)
     {
         var searchPhraseNormalized = searchPhrase?.ToUpper();
 
         var baseQuery = dbContext
             .Restaurants
             .Where(r => r.Name.ToUpper().Contains(searchPhraseNormalized) ||
-                        r.Description.Contains(searchPhraseNormalized));
+                        r.Description.ToUpper().Contains(searchPhraseNormalized));
+
+        if (!string.IsNullOrEmpty(sortBy))
+        {
+            Expression<Func<Restaurant, object>> getSortingKey() => sortBy switch
+                {
+                    nameof(RestaurantDto.Description) => r => r.Description,
+                    nameof(RestaurantDto.Category) => r => r.Category,
+                    _ => r => r.Name
+                };
+            
+            baseQuery = sortingDirection == SortingDirection.Ascending
+                ? baseQuery.OrderBy(getSortingKey())
+                : baseQuery.OrderByDescending(getSortingKey());
+        }
 
         var totalCount = await baseQuery.CountAsync();
         
