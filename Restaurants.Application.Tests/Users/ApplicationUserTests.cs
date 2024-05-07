@@ -6,7 +6,7 @@ using Restaurants.Domain.Constants;
 namespace Restaurants.Application.Tests.Users;
 
 [TestSubject(typeof(ApplicationUser))]
-public class ApplicationUserTest
+public class ApplicationUserTests
 {
     [Theory]
     [InlineData(UserRoles.Admin)]
