@@ -15,13 +15,13 @@ public class CreateRestaurantCommandValidator : AbstractValidator<CreateRestaura
             .NotEmpty()
             .WithMessage("Description is very required");
 
-        RuleFor(dto => dto.MainEmail)
+        RuleFor(dto => dto.MainEmail) 
             .EmailAddress()
             .WithMessage("Email is not valid. Try again");
 
-        // RuleFor(dto => dto.Category)
-        //     .Must(category => _validCategories.Contains(category))
-        //     .WithMessage("Invalid category. Please choose from the valid categories.");
+        RuleFor(dto => dto.Category)
+            .Must(category => _validCategories.Contains(category))
+            .WithMessage("Invalid category. Please choose from the valid categories.");
         
         // .Custom((value, context) =>
         // {
