@@ -52,6 +52,7 @@ public class RestaurantsSeeder(RestaurantsDbContext dbContext) : IRestaurantsSee
                     MainPhoneNumber = "0731276609"
                 },
                 HasDelivery = true,
+                OwnerId = "c987ae84-8369-469f-8fd4-76506cc03410",
                 Dishes =
                 [
                     new ()
@@ -88,6 +89,7 @@ public class RestaurantsSeeder(RestaurantsDbContext dbContext) : IRestaurantsSee
                     ExtraPhoneNumbers = new List<string> { "0969916863", "0971076266" }
                 },
                 HasDelivery = true,
+                OwnerId = "c987ae84-8369-469f-8fd4-76506cc03410",
                 Address = new()
                 {
                     City = "London",
