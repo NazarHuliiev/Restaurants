@@ -1,4 +1,3 @@
-using Microsoft.OpenApi.Models;
 using Restaurants.API.Extensions;
 using Restaurants.API.Middlewares;
 using Restaurants.Application.Extensions;
@@ -8,39 +7,46 @@ using Restaurants.Infrastructure.Seeders;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.AddPresentation();
-builder.Services.AddApplication(builder.Configuration);
-builder.Services.AddInfrastructure(builder.Configuration);
-
-var app = builder.Build();
-
-var scope = app.Services.CreateScope();
-var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantsSeeder>();
-await seeder.Seed();
-
-// Configure the HTTP request pipeline.
-
-app.UseMiddleware<ErrorHandlingMiddleware>();
-app.UseMiddleware<RequestDurationLoggerMiddleware>();
-app.UseSerilogRequestLogging();
-
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(o =>
+    var builder = WebApplication.CreateBuilder(args);
+
+    // Add services to the container.
+    builder.AddPresentation();
+    builder.Services.AddApplication(builder.Configuration);
+    builder.Services.AddInfrastructure(builder.Configuration);
+
+    var app = builder.Build();
+
+    var scope = app.Services.CreateScope();
+    var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantsSeeder>();
+    await seeder.Seed();
+
+    // Configure the HTTP request pipeline.
+    app.UseMiddleware<ErrorHandlingMiddleware>();
+    app.UseMiddleware<RequestDurationLoggerMiddleware>();
+    app.UseSerilogRequestLogging();
+
+    if (app.Environment.IsDevelopment())
     {
-        o.DocExpansion(DocExpansion.None);
-    });   
+        app.UseSwagger();
+        app.UseSwaggerUI(o => { o.DocExpansion(DocExpansion.None); });
+    }
+
+    app.UseHttpsRedirection();
+    app.MapGroup("/api/identity").WithTags("Identity").MapIdentityApi<User>();
+    app.UseAuthorization();
+    app.MapControllers();
+
+    app.Run();
 }
-
-app.UseHttpsRedirection();
-app.MapGroup("/api/identity").WithTags("Identity").MapIdentityApi<User>();
-app.UseAuthorization();
-app.MapControllers();
-
-app.Run();
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application startup failed");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
 
 public partial class Program {}
