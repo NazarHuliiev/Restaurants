@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Restaurants.Domain.Constants;
 using Restaurants.Domain.Entities;
+using Restaurants.Domain.Entities.Identity;
 using Restaurants.Infrastructure.Persistence;
 
 namespace Restaurants.Infrastructure.Seeders;
@@ -47,6 +48,12 @@ public class RestaurantsSeeder(RestaurantsDbContext dbContext) : IRestaurantsSee
     
     private IEnumerable<Restaurant> GetRestaurants()
     {
+        var seedUser = new User
+        {
+            Email = "seed-user@test.com",
+            
+        };
+        
         List<Restaurant> restaurants = [
             new()
             {
@@ -60,7 +67,7 @@ public class RestaurantsSeeder(RestaurantsDbContext dbContext) : IRestaurantsSee
                     MainPhoneNumber = "0731276609"
                 },
                 HasDelivery = true,
-                OwnerId = "c987ae84-8369-469f-8fd4-76506cc03410",
+                Owner = seedUser,
                 Dishes =
                 [
                     new ()
@@ -97,7 +104,7 @@ public class RestaurantsSeeder(RestaurantsDbContext dbContext) : IRestaurantsSee
                     ExtraPhoneNumbers = new List<string> { "0969916863", "0971076266" }
                 },
                 HasDelivery = true,
-                OwnerId = "c987ae84-8369-469f-8fd4-76506cc03410",
+                Owner = seedUser,
                 Address = new()
                 {
                     City = "London",
