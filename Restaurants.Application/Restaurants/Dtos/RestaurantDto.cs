@@ -21,6 +21,8 @@ public class RestaurantDto
     public string? Building { get; set; }
     
     public string? Apartment { get; set; }
+    
+    public string? LogoSasUrl { get; set; }
 
     public IEnumerable<DishDto> Dishes { get; set; } = [];
 }
