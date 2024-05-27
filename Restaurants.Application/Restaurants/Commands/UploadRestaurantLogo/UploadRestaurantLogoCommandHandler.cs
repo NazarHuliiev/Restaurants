@@ -30,7 +30,8 @@ public class UploadRestaurantLogoCommandHandler(
             throw new ForbiddenException();
         }
 
-        var url = await blobStorageService.UploadToBlobAsync(request.File, request.FileName);
+        var fileName = $"{request.RestaurantId}-{request.FileName}";
+        var url = await blobStorageService.UploadToBlobAsync(request.File, fileName);
 
         restaurant.LogoUrl = url;
         await restaurantsRepository.SaveChangesAsync();
