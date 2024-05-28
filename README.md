@@ -1,1 +1,1 @@
-Restaurants API
+Restaurants API project
