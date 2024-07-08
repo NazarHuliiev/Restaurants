@@ -11,6 +11,8 @@ public class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options
     public DbSet<Restaurant> Restaurants { get; set; }
     
     public DbSet<Dish> Dishes { get; set; }
+    
+    public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,5 +33,11 @@ public class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options
             .HasMany(u => u.OwnedRestaurants)
             .WithOne(r => r.Owner)
             .HasForeignKey(r => r.OwnerId);
+
+        modelBuilder.Entity<ShoppingCartItem>()
+            .HasOne(s => s.Dish)
+            .WithMany()
+            .HasForeignKey(s => s.DishId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

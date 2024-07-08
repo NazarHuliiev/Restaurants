@@ -32,8 +32,11 @@ public static class ServiceCollectionExtensions
             .AddEntityFrameworkStores<RestaurantsDbContext>();
 
         services.AddScoped<IRestaurantsSeeder, RestaurantsSeeder>();
+        
         services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
         services.AddScoped<IDishesRepository, DishesRepository>();
+        services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+        
         services.AddAuthorizationBuilder()
             .AddPolicy(PolicyNames.HasCurrentCountry, builder => builder.RequireClaim(AppClaimTypes.CurrentCountry))
             .AddPolicy(PolicyNames.AlLeast20, builder => builder.AddRequirements(new MinimalAgeRequirement(20)))
