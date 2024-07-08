@@ -5,7 +5,8 @@ using Restaurants.Domain.Entities.Identity;
 
 namespace Restaurants.Infrastructure.Persistence;
 
-public class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options) : IdentityDbContext<User>(options)
+public class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options)
+    : IdentityDbContext<User>(options)
 {
     public DbSet<Restaurant> Restaurants { get; set; }
     
