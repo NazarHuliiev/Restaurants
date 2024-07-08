@@ -64,7 +64,7 @@ public class RestaurantsControllerTests : IClassFixture<WebApplicationFactory<Pr
         var client = _factory.CreateClient();
 
         // Act
-        var result = await client.GetAsync("/api/restaurants");
+        var result = await client.GetAsync("/api/restaurants?PageSize=9");
 
         // Assert
         result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
